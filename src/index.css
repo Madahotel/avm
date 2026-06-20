@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════
+   AVM — Alliance de la Vanille Malagasy
+   Global Stylesheet
+   ═══════════════════════════════════════════ */
+
+/* ─── Font: Lumen Sans ───
+   Replace the src URL below with the actual font files
+   if you have licensed Lumen Sans. The current setup uses
+   a system-font fallback chain defined in tailwind.config.ts */
+
+@font-face {
+  font-family: 'Lumen Sans';
+  src: local('Lumen Sans'), local('LumenSans');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  /* ─── Light Mode (default) ─── */
+  :root {
+    --background: 40 20% 97%;
+    --foreground: 0 0% 10%;
+    --card: 40 20% 97%;
+    --card-foreground: 0 0% 10%;
+    --popover: 40 20% 97%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 150 27% 24%;
+    --primary-foreground: 40 20% 97%;
+    --secondary: 40 30% 64%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 15% 90%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 42 43% 50%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 15% 85%;
+    --input: 40 15% 88%;
+    --ring: 150 27% 24%;
+    --radius: 0.625rem;
+
+    --sidebar-background: 40 20% 97%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 150 27% 24%;
+    --sidebar-primary-foreground: 40 20% 97%;
+    --sidebar-accent: 40 15% 90%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 40 15% 85%;
+    --sidebar-ring: 150 27% 24%;
+
+    /* AVM Semantic Tokens — Light */
+    --avm-bg: #F9F8F6;
+    --avm-fg: #1A1A1A;
+    --avm-fg-muted: #5A5A5A;
+    --avm-fg-subtle: #8A8A8A;
+    --avm-border: rgba(0, 0, 0, 0.08);
+    --avm-glass-bg: rgba(255, 255, 255, 0.65);
+    --avm-glass-border: rgba(255, 255, 255, 0.35);
+  }
+
+  /* ─── Dark Mode ─── */
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 88%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 88%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 88%;
+    --primary: 150 20% 35%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 42 30% 45%;
+    --secondary-foreground: 0 0% 7%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 42 35% 45%;
+    --accent-foreground: 0 0% 7%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 150 20% 45%;
+
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 88%;
+    --sidebar-primary: 150 20% 35%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 0 0% 88%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 150 20% 45%;
+
+    /* AVM Semantic Tokens — Dark */
+    --avm-bg: #121212;
+    --avm-fg: #E0E0E0;
+    --avm-fg-muted: #A0A0A0;
+    --avm-fg-subtle: #707070;
+    --avm-border: rgba(255, 255, 255, 0.08);
+    --avm-glass-bg: rgba(0, 0, 0, 0.45);
+    --avm-glass-border: rgba(255, 255, 255, 0.12);
+  }
+
+  /* ─── Base Styles ─── */
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: theme('fontFamily.sans');
+    background-color: var(--avm-bg);
+    color: var(--avm-fg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* ─── Selection ─── */
+  ::selection {
+    background-color: rgba(46, 77, 58, 0.3);
+    color: inherit;
+  }
+
+  .dark ::selection {
+    background-color: rgba(184, 153, 71, 0.4);
+    color: inherit;
+  }
+
+  /* ─── Scrollbar ─── */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(46, 77, 58, 0.3);
+    border-radius: 3px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: rgba(184, 153, 71, 0.35);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(46, 77, 58, 0.5);
+  }
+}
+
+@layer components {
+  /* ─── Glassmorphism Utilities ─── */
+  .glass {
+    background: var(--avm-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--avm-glass-border);
+  }
+
+  .glass-strong {
+    background: var(--avm-glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--avm-glass-border);
+  }
+
+  .glass-subtle {
+    background: var(--avm-glass-bg);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid var(--avm-glass-border);
+  }
+
+  /* ─── AVM Button Variants ─── */
+  .btn-avm-primary {
+    @apply inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium transition-all duration-200;
+    background-color: #2E4D3A;
+    color: #F9F8F6;
+  }
+
+  .btn-avm-primary:hover {
+    background-color: #3D634B;
+  }
+
+  .dark .btn-avm-primary {
+    background-color: #4A7A5D;
+    color: #121212;
+  }
+
+  .dark .btn-avm-primary:hover {
+    background-color: #5A9470;
+  }
+
+  .btn-avm-gold {
+    @apply inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium transition-all duration-200;
+    background-color: #B89947;
+    color: #1A1A1A;
+  }
+
+  .btn-avm-gold:hover {
+    background-color: #D4B56A;
+  }
+
+  /* ─── Container ─── */
+  .avm-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* ─── Section Spacing ─── */
+  .avm-section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* ─── Text Gradient (subtle gold accent) ─── */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #B89947 0%, #D4B56A 50%, #C4A882 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  /* ─── Transition for theme changes ─── */
+  .theme-transition {
+    transition: background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                fill 0.3s ease,
+                stroke 0.3s ease;
+  }
+
+  /* ─── Subtle orb floating animation ─── */
+  @keyframes orb-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(30px, -20px) scale(1.05); }
+    50% { transform: translate(-20px, 30px) scale(0.95); }
+    75% { transform: translate(20px, 20px) scale(1.02); }
+  }
+
+  /* ─── Leaf drift animations ─── */
+  @keyframes leaf-drift-1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.04; }
+    33% { transform: translate(15px, -25px) rotate(10deg); opacity: 0.06; }
+    66% { transform: translate(-10px, -15px) rotate(-5deg); opacity: 0.03; }
+  }
+
+  @keyframes leaf-drift-2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.03; }
+    33% { transform: translate(-20px, 20px) rotate(-15deg); opacity: 0.05; }
+    66% { transform: translate(15px, 10px) rotate(8deg); opacity: 0.02; }
+  }
+
+  @keyframes leaf-drift-3 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.03; }
+    50% { transform: translate(25px, -30px) rotate(20deg); opacity: 0.05; }
+  }
+
+  /* ─── Hide scrollbar but keep functionality ─── */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
